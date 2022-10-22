@@ -5,7 +5,7 @@ execute:
   freeze: auto
 
 website:
-  title: "personal-website"
+  title: "Josh Yamamoto"
   sidebar: 
     style: "floating"
     search: false
