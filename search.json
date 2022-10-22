@@ -4,13 +4,13 @@
     "href": "index.html",
     "title": "Welcome!",
     "section": "",
-    "text": "1 + 1\n\n[1] 2"
+    "text": "This is a Quarto website."
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About me",
+    "title": "About Me",
     "section": "",
-    "text": "1 + 1\n\n[1] 2"
+    "text": "About this site"
   }
 ]
