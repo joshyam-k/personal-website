@@ -6,11 +6,14 @@ execute:
 
 website:
   title: "personal-website"
-  navbar:
-    left:
+  sidebar: 
+    style: "floating"
+    search: false
+    contents: 
       - href: index.qmd
-        text: Home
-      - about.qmd
+        text: "Home"
+      - href: about.qmd
+        text: "About"
 
 format:
   html:
