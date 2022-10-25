@@ -5,11 +5,9 @@ execute:
   freeze: auto
 
 website:
-  favicon: logo.png
-  twitter-card: true
-  site-url: https://example.com
   sidebar: 
     style: "floating"
+    pinned: true
     search: false
     contents: 
       - href: index.qmd
@@ -20,6 +18,7 @@ website:
 format:
   html:
     theme: cosmo
+    mainfont: "Roboto"
     css: styles.css
     toc: true
 
