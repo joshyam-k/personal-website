@@ -18,7 +18,7 @@ website:
 format:
   html:
     theme: cosmo
-    mainfont: "Roboto"
+    mainfont: "Roboto Mono", sans-serif
     css: styles.css
     toc: true
 
