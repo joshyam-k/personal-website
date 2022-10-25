@@ -1,9 +1,10 @@
 ---
-title: "Welcome!"
+title: "Josh Yamamoto"
 about:
   template: jolla
   image: prof_photo.jpg
   image-shape: rectangle
+  image-width: 20em
   links:
     - icon: twitter
       text: twitter
@@ -13,4 +14,4 @@ about:
       href: https://github.com/joshyam-k
 ---
 
-This is a Quarto website.
+Hello! I'm a 
