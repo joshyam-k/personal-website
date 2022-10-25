@@ -2,7 +2,7 @@
 title: "Welcome!"
 about:
   template: jolla
-  image: profile.jpg
+  image: prof_photo.jpg
   links:
     - icon: twitter
       text: twitter
