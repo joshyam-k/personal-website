@@ -18,7 +18,7 @@ website:
 format:
   html:
     theme: cosmo
-    mainfont: "Lucida Console"
+    mainfont: monospace
     css: styles.css
     toc: true
 
