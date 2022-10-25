@@ -3,13 +3,14 @@ title: "Welcome!"
 about:
   template: jolla
   image: prof_photo.jpg
+  image-shape: rectangle
   links:
     - icon: twitter
       text: twitter
-      href: https://twitter.com
+      href: https://twitter.com/joshyam_
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/joshyam-k
 ---
 
 This is a Quarto website.
