@@ -5,6 +5,7 @@ execute:
   freeze: auto
 
 website:
+  repo-url: https://github.com/joshyam-k/personal-website
   sidebar: 
     style: "docked"
     pinned: true
@@ -19,7 +20,10 @@ website:
         text: "Blog"
 format:
   html:
-    theme: cosmo
+    theme: 
+      - cosmo
+      - custom.scss
+    fontsize: 1.5em
     mainfont: monospace
     css: styles.css
     toc: true
