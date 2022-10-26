@@ -1,5 +1,6 @@
 ---
 title: "first blog!"
+description: "testing how to create a blog post in quarto"
 ---
 
 Testing out blog framework!

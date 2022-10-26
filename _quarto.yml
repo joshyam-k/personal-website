@@ -6,7 +6,7 @@ execute:
 
 website:
   sidebar: 
-    style: "floating"
+    style: "docked"
     pinned: true
     search: false
     contents: 
