@@ -6,7 +6,7 @@ execute:
 
 website:
   sidebar: 
-    style: "floating"
+    style: "docked"
     contents: 
       - href: index.qmd
         text: "Home"
