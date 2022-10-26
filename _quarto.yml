@@ -9,6 +9,7 @@ website:
     style: "docked"
     pinned: true
     border: false
+    search: false
     contents: 
       - href: index.qmd
         text: "Home"
