@@ -2,7 +2,7 @@
 title: "Josh Yamamoto"
 about:
   template: jolla
-  image: prof_photo.jpg
+  image: imgs/prof_photo.jpg
   image-shape: rectangle
   image-width: 20em
   links:
