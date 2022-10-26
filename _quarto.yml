@@ -9,7 +9,6 @@ website:
     style: "docked"
     pinned: true
     border: false
-    logo: plant_emoji.jpg
     contents: 
       - href: index.qmd
         text: "Home"
