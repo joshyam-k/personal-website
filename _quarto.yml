@@ -7,8 +7,6 @@ execute:
 website:
   sidebar: 
     style: "docked"
-    pinned: true
-    search: false
     contents: 
       - href: index.qmd
         text: "Home"
