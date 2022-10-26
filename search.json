@@ -7,6 +7,20 @@
     "text": "Hello! I’m a"
   },
   {
+    "objectID": "blog-posts/blog1.html",
+    "href": "blog-posts/blog1.html",
+    "title": "first blog!",
+    "section": "",
+    "text": "Testing out blog framework!"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "blog",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About Me",

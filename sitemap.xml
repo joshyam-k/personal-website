@@ -2,10 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/joshyam-k/personal-website/index.html</loc>
-    <lastmod>2022-10-25T23:03:57.349Z</lastmod>
+    <lastmod>2022-10-26T04:31:41.567Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/joshyam-k/personal-website/blog-posts/blog1.html</loc>
+    <lastmod>2022-10-26T04:31:42.351Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/joshyam-k/personal-website/blog.html</loc>
+    <lastmod>2022-10-26T04:31:42.747Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/joshyam-k/personal-website/about.html</loc>
-    <lastmod>2022-10-25T23:03:58.121Z</lastmod>
+    <lastmod>2022-10-26T04:31:43.115Z</lastmod>
   </url>
 </urlset>
