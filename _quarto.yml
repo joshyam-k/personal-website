@@ -20,7 +20,7 @@ website:
 format:
   html:
     theme: cosmo
-    fontsize: 1.5em
+    fontsize: 4em
     mainfont: monospace
     css: styles.css
     toc: true
