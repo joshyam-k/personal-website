@@ -1,8 +1,6 @@
 project:
   type: website
   
-execute: 
-  freeze: auto
 
 website:
   repo-url: https://github.com/joshyam-k/personal-website
