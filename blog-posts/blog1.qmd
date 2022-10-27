@@ -20,7 +20,7 @@ $$P(\text{Z odd}) = P(Z = 1) + P(Z = 3) + P(Z = 5) \ +  \ ...$$
 
 So I figured I might as well just try to solve for these first few probabilities and see if I could find a pattern.
 
-If you think about it, if $X,Y$ are i.i.d $\text{Unif}(0,1)$ then we can imagine each realization of X and Y being like the x and y coordinates of a random point in the cartesian product $[0,1] \times [0,1]$. And if we want to find the probability that $Z = 1$ then we can just generate many such coordinates and then see how many of these coordinates satisfy our condition. This is a lot of words and it might still be confusing so lets make a plot. We'll write it as a function since we'll want to make more of these plots later on:
+If you think about it, if $X,Y$ are i.i.d $\text{Unif}(0,1)$ then we can imagine each realization of X and Y being like the x and y coordinates of a random point in the cartesian product $[0,1] \times [0,1]$. And if we want to get a rough sense for the probability that $Z = 1$ then we can just generate many such coordinates and then see how many of these coordinates satisfy our condition. This is a lot of words and it might still be confusing so lets make a plot. We'll write it as a function since we'll want to make more of these plots later on:
 
 ```{r, message = F, warning = F}
 library(tidyverse)
@@ -66,9 +66,9 @@ data_points %>%
 
 cool right?
 
-A problem that seemed totally opaque is actually pretty intuitive when visualized.
+Beyond being a pretty picture, we're also most of the way towards solving the problem. Importantly though, the main idea here is that we slowly built up an understanding of the problem by using ggplot on a few small cases.
 
-Now for the math geeks out there we can actually solve for this probability by writing it as a sum. Recall how we said that the conditions for $P(Z = 1)$ were that $Y \le X < 2Y$, well similarly, the conditions for $P(Z = 3)$ are that $3Y \le X < 4Y$ and the pattern continues. 
+We can actually solve for this probability by writing it as a sum. Recall how we said that the conditions for $P(Z = 1)$ were that $Y \le X < 2Y$, well similarly, the conditions for $P(Z = 3)$ are that $3Y \le X < 4Y$ and the pattern continues. 
 
 So we can write the sum of all these triangles as
 
