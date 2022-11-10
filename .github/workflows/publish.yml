@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -22,12 +26,13 @@ jobs:
         with:
           r-version: '4.2.0'
 
-      - name: Install R Dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get install libcurl4-openssl-dev
-        uses: r-lib/actions/setup-renv@v2
+      - uses: r-lib/actions/setup-r@master
         with:
-          cache-version: 2
+          r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
