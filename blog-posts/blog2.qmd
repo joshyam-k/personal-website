@@ -1,0 +1,7 @@
+---
+title: "gamma generalized linear models"
+date: "11/10/22"
+image: ""
+---
+
+For my senior thesis I'm working on fitting bayesian models to a pretty unique data structure. 
