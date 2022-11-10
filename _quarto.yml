@@ -21,7 +21,7 @@ format:
     theme: 
       - cosmo
       - custom.scss
-    fontsize: 1.4em
+    fontsize: 1.2em
     mainfont: monospace
     css: styles.css
     toc: true
