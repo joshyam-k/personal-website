@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="testing how to create a blog post in quarto">
+<meta name="dcterms.date" content="2022-10-27">
+<meta name="description" content="a playful way to solve a complex probability problem">
 
-<title>first blog!</title>
+<title>ggplot, geometry, and visualizing probability</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +22,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -59,6 +123,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -69,7 +134,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">first blog!</h1>
+      <h1 class="quarto-secondary-nav-title">ggplot, geometry, and visualizing probability</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -109,12 +174,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">first blog!</h1>
+<h1 class="title d-none d-lg-block">ggplot, geometry, and visualizing probability</h1>
 </div>
 
 <div>
   <div class="description">
-    testing how to create a blog post in quarto
+    a playful way to solve a complex probability problem
   </div>
 </div>
 
@@ -122,13 +187,80 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 27, 2022</p>
+    </div>
+  </div>
     
   </div>
   
 
 </header>
 
-<p>Testing out blog framework!</p>
+<p>I was recently given the following problems in one of my math classes</p>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be i.i.d <span class="math inline">\(\text{Unif}(0,1)\)</span> and define a variable <span class="math inline">\(Z = ⌊X/Y⌋\)</span>, where <span class="math inline">\(⌊z⌋\)</span> denotes the greatest integer less than or equal to <span class="math inline">\(z\)</span></p>
+<p>Find the probability that Z is an odd number</p>
+</blockquote>
+<p>at first glance I had absolutely no idea how to solve this problem. And even as I started to understand what the question was asking I still didn’t really know how one would go about solving it.</p>
+<p>I knew that the problem could be rephrased as</p>
+<p>Find</p>
+<p><span class="math display">\[P(\text{Z odd}) = P(Z = 1) + P(Z = 3) + P(Z = 5) \ +  \ ...\]</span></p>
+<p>So I figured I might as well just try to solve for these first few probabilities and see if I could find a pattern.</p>
+<p>If you think about it, if <span class="math inline">\(X,Y\)</span> are i.i.d <span class="math inline">\(\text{Unif}(0,1)\)</span> then we can imagine each realization of X and Y being like the x and y coordinates of a random point in the cartesian product <span class="math inline">\([0,1] \times [0,1]\)</span>. And if we want to get a rough sense for the probability that <span class="math inline">\(Z = 1\)</span> then we can just generate many such coordinates and then see how many of these coordinates satisfy our condition. This is a lot of words and it might still be confusing so lets make a plot. We’ll write it as a function since we’ll want to make more of these plots later on:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_points <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">15000</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">15000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>floor_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(data, z) {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y , <span class="at">color  =</span> (<span class="fu">floor</span>(x<span class="sc">/</span>y) <span class="sc">==</span> {{ z }}))) <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"midnightblue"</span>, <span class="st">"cyan4"</span>)) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">floor_plot</span>(data_points, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="blog1_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and so since we know that the area of the entire square is just one, then the probability that <span class="math inline">\(Z = 1\)</span> can be approximated by counting what fraction of the 10,000 points that we generated is in that cyan streak. Moreover we can imagine generating infinitely many points and coloring them accordingly, and in a monte carlo fashion, say that the probability that <span class="math inline">\(Z = 1\)</span> is just the area of that cyan section. And once you get to see it visually it makes sense why this is the case.</p>
+<p>In order to have <span class="math inline">\(\lfloor X/Y \rfloor =1\)</span> then we certainly need <span class="math inline">\(X &gt; Y\)</span>, since otherwise the floor is zero, but if we make X too big then we end up with 2 or 3 and so on. So we require that <span class="math inline">\(X \ge Y\)</span> but also that <span class="math inline">\(X &lt; 2Y\)</span>. In other words, once X gets to be twice as large as Y, then the floor is larger than 1.</p>
+<p>And if we want to find <span class="math inline">\(P(Z = 3)\)</span>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">floor_plot</span>(data_points, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="blog1_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and <span class="math inline">\(P(Z = 5)\)</span>?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">floor_plot</span>(data_points, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="blog1_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>and how about all odd numbers? (which is what we’re really trying to find)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_points <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, y, <span class="at">color =</span> (<span class="fu">floor</span>(x<span class="sc">/</span>y)<span class="sc">%%</span><span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"midnightblue"</span>, <span class="st">"cyan4"</span>)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="blog1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>cool right?</p>
+<p>Beyond being a pretty picture, we’re also most of the way towards solving the problem. Importantly though, the main idea here is that we slowly built up an understanding of the problem by using ggplot on a few small cases.</p>
+<p>We can actually solve for this probability by writing it as a sum. Recall how we said that the conditions for <span class="math inline">\(P(Z = 1)\)</span> were that <span class="math inline">\(Y \le X &lt; 2Y\)</span>, well similarly, the conditions for <span class="math inline">\(P(Z = 3)\)</span> are that <span class="math inline">\(3Y \le X &lt; 4Y\)</span> and the pattern continues.</p>
+<p>So we can write the sum of all these triangles as</p>
+<p><span class="math display">\[P(\text{Z odd}) = \sum_{i=1}^\infty\frac{1}{2}\bigg(\frac{1}{2i-1} - \frac{1}{2i}\bigg) = \frac{\ln(2)}{2} \approx 0.34\]</span></p>
+<p>which ends up being a very nice answer! thanks ggplot</p>
 
 
 

@@ -69,9 +69,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -160,22 +160,26 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1666906894277" data-listing-reading-time-sort="0.02">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1666828800000" data-listing-file-modified-sort="1668109812256" data-listing-reading-time-sort="3.19">
 <div class="body">
 <a href="./blog-posts/blog1.html">
 <h3 class="no-anchor listing-title">
-first blog!
+ggplot, geometry, and visualizing probability
 </h3>
 <div class="listing-subtitle">
 
 </div>
 <div class="listing-description">
-<p>testing how to create a blog post in quarto</p>
+<p>a playful way to solve a complex probability problem</p>
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./blog-posts/blog1.html"> </a>
+<a href="./blog-posts/blog1.html">
+<div class="listing-date">
+Oct 27, 2022
+</div>
+</a>
 </div>
 </div>
 </div>
