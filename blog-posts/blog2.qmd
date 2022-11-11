@@ -18,7 +18,7 @@ You don't even have to specify the link function if you don't want, because `glm
 
 So maybe we are fitting a model to a response variable that's continuous, strictly positive, and right skewed.
 
-```{r, echo=F}
+```{r, echo=F, message=F, warning = F}
 library(tidyverse)
 data <- data.frame(
   x = rgamma(1000, 1.2, 10)
