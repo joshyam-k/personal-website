@@ -5,6 +5,30 @@ date: "11/10/22"
 image: ""
 ---
 
-While trying to fit a Bayesian regression model where my response variable was right skewed and strictly *positive*, I was getting results that seemed alright, but as I started to think about the results more deeply I noticed something pretty troubling.
+What makes GLMs "general" is that
 
+1.  The response can be modeled as coming from any distribution in the *exponential family*
+2.  A link function that connects the linear component of our model to the response distribution. Sometimes it's helpful for me to think of the link function as making the linear component and the response distribution "compatible". (ex: if our model outcomes are in (0,1) then we need a link function that will map that restricted space onto the entire real line).
+
+And what's often-times nice about getting to use a function like `glm()` is that it abstracts what goes on behind the scenes here. All you have to do is specify your formula, what distribution your response variable takes, and your data. This could be as simple as running
+
+    glm(y ~ x, family = "some distribution in the exponential family", data)
+
+You don't even have to specify the link function if you don't want, because `glm()` will just choose what's called the canonical link (which I won't get into here).
+
+So maybe we are fitting a model to a response variable that's continuous, strictly positive, and right skewed.
+
+```{r, echo=F}
+library(tidyverse)
+data <- data.frame(
+  x = rgamma(1000, 1.2, 10)
+)
+```
+
+```{r}
+data %>% 
+  ggplot(aes(x = x)) +
+  geom_density(fill = "lightblue", alpha = 0.4) +
+  theme_bw()
+```
 
