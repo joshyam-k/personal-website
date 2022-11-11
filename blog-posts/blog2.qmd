@@ -5,4 +5,6 @@ date: "11/10/22"
 image: ""
 ---
 
-While trying to fit bayesian models to
+While trying to fit a Bayesian regression model where my response variable was right skewed and strictly *positive*, I was getting results that seemed alright, but as I started to think about the results more deeply I noticed something pretty troubling.
+
+
