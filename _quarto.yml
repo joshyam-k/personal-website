@@ -10,6 +10,10 @@ website:
     pinned: true
     border: false
     search: false
+    right:
+      - icon: github
+        href: https://github.com/
+        aria-label: GitHub
     contents: 
       - href: index.qmd
         text: "Home"
