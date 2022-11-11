@@ -11,7 +11,7 @@
     "href": "blog-posts/blog2.html",
     "title": "gamma generalized linear models",
     "section": "",
-    "text": "While trying to fit bayesian models to"
+    "text": "While trying to fit a Bayesian regression model where my response variable was right skewed and strictly positive, I was getting results that seemed alright, but as I started to think about the results more deeply I noticed something pretty troubling."
   },
   {
     "objectID": "blog-posts/blog1.html",
