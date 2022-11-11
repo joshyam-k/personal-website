@@ -2,7 +2,7 @@
 title: "ggplot, geometry, and visualizing probability"
 description: "a playful way to solve a complex probability problem"
 date: "10/27/22"
-image: "blog1-pic1.png"
+image: "blog1-preview.png"
 ---
 
 I was recently given the following problems in one of my math classes

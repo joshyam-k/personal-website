@@ -1,7 +1,8 @@
 ---
 title: "gamma generalized linear models"
+description: "elucidating a process that just gets hidden behind using glm()"
 date: "11/10/22"
 image: ""
 ---
 
-For my senior thesis I'm working on fitting bayesian models to a pretty unique data structure. 
+While trying to fit bayesian models to
