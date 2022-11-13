@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2022-11-10">
-<meta name="description" content="elucidating a process that just gets hidden behind using glm()">
+<meta name="description" content="(gone bayesian)">
 
 <title>gamma generalized linear models</title>
 <style>
@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div>
   <div class="description">
-    elucidating a process that just gets hidden behind using glm()
+    (gone bayesian)
   </div>
 </div>
 
@@ -203,22 +203,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The response can be modeled as coming from any distribution in the <em>exponential family</em></li>
 <li>A link function that connects the linear component of our model to the response distribution. Sometimes it’s helpful for me to think of the link function as making the linear component and the response distribution “compatible”. (ex: if our model outcomes are in (0,1) then we need a link function that will map that restricted space onto the entire real line).</li>
 </ol>
-<p>And what’s often-times nice about getting to use a function like <code>glm()</code> is that it abstracts what goes on behind the scenes here. All you have to do is specify your formula, what distribution your response variable takes, and your data. This could be as simple as running</p>
-<pre><code>glm(y ~ x, family = "some distribution in the exponential family", data)</code></pre>
-<p>You don’t even have to specify the link function if you don’t want, because <code>glm()</code> will just choose what’s called the canonical link (which I won’t get into here).</p>
+<p>In the case of just a normal linear model it’s pretty obvious what th</p>
 <p>So maybe we are fitting a model to a response variable that’s continuous, strictly positive, and right skewed.</p>
 <div class="cell">
 
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="blog2_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Seems like this data structure would merit the use of a gamma glm- the response certainly would be well described by a gamma distirbution (in fact the plot above actually was generated with random draws from a <code>Gamma(1.5, 10)</code> random variable) and so we might</p>
 
 
 

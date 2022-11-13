@@ -11,7 +11,7 @@
     "href": "blog-posts/blog2.html",
     "title": "gamma generalized linear models",
     "section": "",
-    "text": "The response can be modeled as coming from any distribution in the exponential family\nA link function that connects the linear component of our model to the response distribution. Sometimes it’s helpful for me to think of the link function as making the linear component and the response distribution “compatible”. (ex: if our model outcomes are in (0,1) then we need a link function that will map that restricted space onto the entire real line).\n\nAnd what’s often-times nice about getting to use a function like glm() is that it abstracts what goes on behind the scenes here. All you have to do is specify your formula, what distribution your response variable takes, and your data. This could be as simple as running\nglm(y ~ x, family = \"some distribution in the exponential family\", data)\nYou don’t even have to specify the link function if you don’t want, because glm() will just choose what’s called the canonical link (which I won’t get into here).\nSo maybe we are fitting a model to a response variable that’s continuous, strictly positive, and right skewed.\n\n\n\n\ndata %>% \n  ggplot(aes(x = x)) +\n  geom_density(fill = \"lightblue\", alpha = 0.4) +\n  theme_bw()"
+    "text": "The response can be modeled as coming from any distribution in the exponential family\nA link function that connects the linear component of our model to the response distribution. Sometimes it’s helpful for me to think of the link function as making the linear component and the response distribution “compatible”. (ex: if our model outcomes are in (0,1) then we need a link function that will map that restricted space onto the entire real line).\n\nIn the case of just a normal linear model it’s pretty obvious what th\nSo maybe we are fitting a model to a response variable that’s continuous, strictly positive, and right skewed.\n\n\n\n\ndata %>% \n  ggplot(aes(x = x)) +\n  geom_density(fill = \"lightblue\", alpha = 0.4) +\n  theme_bw()\n\n\n\n\nSeems like this data structure would merit the use of a gamma glm- the response certainly would be well described by a gamma distirbution (in fact the plot above actually was generated with random draws from a Gamma(1.5, 10) random variable) and so we might"
   },
   {
     "objectID": "blog-posts/blog1.html",
@@ -25,7 +25,7 @@
     "href": "blog.html",
     "title": "stats + coding thoughts",
     "section": "",
-    "text": "elucidating a process that just gets hidden behind using glm()\n\n\n\n\n\n\nNov 10, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\na playful way to solve a complex probability problem\n\n\n\n\n\n\nOct 27, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "(gone bayesian)\n\n\n\n\n\n\nNov 10, 2022\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\na playful way to solve a complex probability problem\n\n\n\n\n\n\nOct 27, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
