@@ -4,7 +4,6 @@ project:
 
 website:
   repo-url: https://github.com/joshyam-k/personal-website
-  repo-actions: [edit]
   sidebar: 
     style: "docked"
     pinned: true
