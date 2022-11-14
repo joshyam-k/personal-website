@@ -1,6 +1,6 @@
 ---
 title: "Using the `purrr` ~ shortcut in your own custom functions"
-description: ""
+description: "a short walkthrough"
 date: "11/14/22"
 image: ""
 ---
