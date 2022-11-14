@@ -9,9 +9,9 @@
   {
     "objectID": "blog-posts/blog2.html",
     "href": "blog-posts/blog2.html",
-    "title": "Writing your own functionals",
+    "title": "Using the purrr ~ shortcut in your own custom functions",
     "section": "",
-    "text": "library(purrr)\n\nFunctionals are defined as functions that take a function as input and return a vector as output. The simplest non-base R way to do this is by using a purrr::map_*() function. These functions simply apply the user specified function to each element in the input vector and returns an object with the same number of elements as the input.\n\nsquare <- function(x) x ^ 2\nmap_dbl(1:3, square)\n\n[1] 1 4 9\n\n\nWe can simplify this by making use of anyonymous functions and shortcuts\n\nmap_dbl(1:3, ~ .x ^ 2)\n\n[1] 1 4 9\n\n\nThis code looks very nice and clean, but at least for me it’s not immediately clear how the code works and what’s happening behind the scenes\n\nevery2 <- function(.x, .p, ...){ \n  .p <- as_mapper(.p, ...)\n  \n  for (i in .x) { \n    if (!.p(i, ...)) {\n      return(FALSE)\n    }   \n  TRUE\n  }\n}"
+    "text": "Functionals basics\n\nlibrary(purrr)\n\nFunctionals are defined as functions that take a function as input and return a vector as output. The simplest non-base R way to do this is by using a purrr::map_*() function. These functions simply apply the user specified function to each element in the input vector and returns an object with the same number of elements as the input.\n\nsquare <- function(x) x ^ 2\nmap_dbl(1:3, square)\n\n[1] 1 4 9\n\n\nWe can simplify this by making use of anyonymous functions and shortcuts. First we can define our function inside of map_dbl and since we don’t have to bind it to a name it is considered an anonymous function:\n\nmap_dbl(1:3, function(x) x ^ 2)\n\n[1] 1 4 9\n\n\nNext we can use a special purrr shortcut to simplify this code even further\n\nmap_dbl(1:3, ~ .x ^ 2)\n\n[1] 1 4 9\n\n\nThis code is wonderfully clean and concise and it sure would be nice if we could write our own functions that use the same syntax.\n\nall_met <- function(.x, .f, ...){ \n  .f <- as_mapper(.f, ...)\n  \n  for (i in .x) { \n    if (!.f(i, ...)) {\n      return(FALSE)\n    }   \n  TRUE\n  }\n}\n\nall_met(2:3, ~ .x > 1)"
   },
   {
     "objectID": "blog-posts/blog1.html",
@@ -25,7 +25,7 @@
     "href": "blog.html",
     "title": "stats + coding thoughts",
     "section": "",
-    "text": "Writing your own functionals\n\n\n\n\n\nas a way to help understand how purrr::map() works\n\n\n\n\n\n\nNov 14, 2022\n\n\n\n\n\n\n  \n\n\n\n\nggplot, geometry, and visualizing probability\n\n\n\n\n\na playful way to solve a complex probability problem\n\n\n\n\n\n\nOct 27, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Using the purrr ~ shortcut in your own custom functions\n\n\n\n\n\n\n\n\n\n\n\n\nNov 14, 2022\n\n\n\n\n\n\n  \n\n\n\n\nggplot, geometry, and visualizing probability\n\n\n\n\n\na playful way to solve a complex probability problem\n\n\n\n\n\n\nOct 27, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
