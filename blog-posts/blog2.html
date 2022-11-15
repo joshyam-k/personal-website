@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2022-11-14">
 <meta name="description" content="and understanding purrr::map() more deeply along the way">
 
-<title>Using the purrr ~ shortcut in your own custom functions</title>
+<title>Using the purrr function shortcuts in your own custom functions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Using the <code>purrr</code> ~ shortcut in your own custom functions</h1>
+      <h1 class="quarto-secondary-nav-title">Using the <code>purrr</code> function shortcuts in your own custom functions</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Using the <code>purrr</code> ~ shortcut in your own custom functions</h1>
+<h1 class="title d-none d-lg-block">Using the <code>purrr</code> function shortcuts in your own custom functions</h1>
 </div>
 
 <div>
@@ -232,44 +232,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 1 4 9</code></pre>
 </div>
 </div>
-<p>This code is wonderfully clean and concise and it sure would be nice if we could write our own functions that use the same syntax. And the good news is that we can! And the solution only relies on the use of the function <code>purrr::as_mapper()</code> which can convert a formula object into a function.</p>
-<p>For example:</p>
+<p>Technically it would be most correct to write</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>func_formula <span class="ot">&lt;-</span> <span class="er">~</span> .x <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>func <span class="ot">&lt;-</span> <span class="fu">as_mapper</span>(func_formula)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">func</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,  <span class="sc">~</span> . <span class="sc">^</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 9</code></pre>
+</div>
+</div>
+<p>since the convention with these formula objects is to use</p>
+<ul>
+<li><code>.</code> for a single argument function</li>
+<li><code>.x</code> and <code>.y</code> for a two argument function</li>
+<li><code>..1</code>, <code>..2</code>, <code>..3</code> , etc for functions with more arguments</li>
+</ul>
+<p>but sometimes it’s nice to still see the <code>x</code> in the formula.</p>
+<p>Either way, this code is wonderfully clean and concise and it sure would be nice if we could write our own functions that use the same syntax. And the good news is that we can! The solution only relies on the use of the function <code>purrr::as_mapper()</code> which can convert a formula object into a function.</p>
+<p>To demonstrate that functionality I’ll show a small toy example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>func_formula <span class="ot">&lt;-</span> <span class="er">~</span> .x <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>func <span class="ot">&lt;-</span> <span class="fu">as_mapper</span>(func_formula)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">func</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
 <p>And actually, under the hood, <code>purrr::map()</code> is first applying this <code>as_mapper()</code> function to the user supplied function which explains why we can supply functions to <code>map()</code> in so many different ways.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span>map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span>map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (.x, .f, ...) 
 {
     .f &lt;- as_mapper(.f, ...)
     .Call(map_impl, environment(), ".x", ".f", "list")
 }
-&lt;bytecode: 0x55c9f9075ac0&gt;
+&lt;bytecode: 0x55f2c0d3a518&gt;
 &lt;environment: namespace:purrr&gt;</code></pre>
 </div>
 </div>
 <p>So with this knowledge under our belt, we can write a custom function of our own that is able to use that clean and concise syntax that <code>map()</code> allows.</p>
+<p>Although this is certainly not a very useful function, it shows a very bare bones example of how you can write your own functions to use the purrr shortcut syntax!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>all_met <span class="ot">&lt;-</span> <span class="cf">function</span>(.x, .f, ...){ </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  .f <span class="ot">&lt;-</span> <span class="fu">as_mapper</span>(.f, ...)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> .x) { </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span><span class="fu">.f</span>(i, ...)) {</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    }   </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">all_met</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="sc">~</span> .x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>all_met <span class="ot">&lt;-</span> <span class="cf">function</span>(.x, .f, ...){ </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  .f <span class="ot">&lt;-</span> <span class="fu">as_mapper</span>(.f, ...)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> .x) { </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">.f</span>(i)) <span class="fu">return</span>(F)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(T)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">all_met</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="sc">~</span> .x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all_met</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="sc">~</span> .x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
 </div>
 
 
