@@ -1,5 +1,5 @@
 ---
-title: "Using the `purrr` ~ shortcut in your own custom functions"
+title: "Using the `purrr` function shortcuts in your own custom functions"
 description: "and understanding `purrr::map()` more deeply along the way"
 date: "11/14/22"
 image: ""
@@ -32,10 +32,23 @@ Next we can use a special `purrr` shortcut to simplify this code even further
 map_dbl(1:3, ~ .x ^ 2)
 ```
 
+Technically it would be most correct to write
 
-This code is wonderfully clean and concise and it sure would be nice if we could write our own functions that use the same syntax. And the good news is that we can! And the solution only relies on the use of the function `purrr::as_mapper()` which can convert a formula object into a function.
+```{r}
+map_dbl(1:3,  ~ . ^ 2)
+```
 
-For example:
+since the convention with these formula objects is to use
+
+- `.` for a single argument function
+- `.x` and `.y` for a two argument function
+- `..1`, `..2`, `..3` , etc for functions with more arguments
+
+but sometimes it's nice to still see the `x` in the formula.
+
+Either way, this code is wonderfully clean and concise and it sure would be nice if we could write our own functions that use the same syntax. And the good news is that we can! The solution only relies on the use of the function `purrr::as_mapper()` which can convert a formula object into a function.
+
+To demonstrate that functionality I'll show a small toy example:
 
 ```{r}
 func_formula <- ~ .x ^ 2
@@ -53,19 +66,20 @@ purrr::map
 
 So with this knowledge under our belt, we can write a custom function of our own that is able to use that clean and concise syntax that `map()` allows.
 
+Although this is certainly not a very useful function, it shows a very bare bones example of how you can write your own functions to use the purrr shortcut syntax!
+
 ```{r}
 all_met <- function(.x, .f, ...){ 
   .f <- as_mapper(.f, ...)
   
   for (i in .x) { 
-    if (!.f(i, ...)) {
-      return(FALSE)
-    }   
-  TRUE
+    if(!.f(i)) return(F)
   }
+  return(T)
 }
 
-all_met(2:3, ~ .x > 1)
+all_met(2:5, ~ .x > 1)
+all_met(1:5, ~ .x > 1)
 ```
 
 
