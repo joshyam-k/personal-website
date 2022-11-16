@@ -1,13 +1,13 @@
 ---
-title: "resume"
+title: "Resume"
 editor: visual
 ---
 
-## Joshua Yamamoto
+#### Joshua Yamamoto
 
 **Portland, OR • [github](https://github.com/joshyam-k)- joshyam-k • joshuayamamoto5\@gmail.com**
 
-### EDUCATION
+##### EDUCATION
 
 **BA Mathematics with a Concentration in Statistics** \| Reed College, Portland, OR \| May 2023
 
@@ -15,7 +15,7 @@ Coursework in Statistics, Computer Science, Mathematics, Physics, and Philosophy
 
 Overall GPA: 3.95; Concentration GPA: 4.00
 
-### EXPERIENCE
+##### EXPERIENCE
 
 **Forestry Data Science Researcher** \| Harvard University, Cambridge MA \| June--August 2022
 
@@ -56,14 +56,14 @@ Overall GPA: 3.95; Concentration GPA: 4.00
 -   Collaborated with others to produce the official R resource pages for Reed College
 -   Oversaw the creation of the official Data Equity resources for Reed College
 
-### PUBLICATIONS
+##### PUBLICATIONS
 
 Gender Differences in Collaboration Patterns in Computer Science. https://doi.org/10.3390/publications10010010
 
-### SKILLS
+##### SKILLS
 
 R/RStudio, Git/GitHub, Python, C/C++, SQL, LaTeX, QGIS, Google Suite
 
-### LANGUAGES
+##### LANGUAGES
 
 Spanish (Advanced), French (Beginner)
