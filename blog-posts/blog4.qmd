@@ -1,11 +1,13 @@
 ---
-title: "Job Searching..."
-description: ""
+title: "I'm on the Job Market"
+description: "Looking for roles in statistical software"
 date: "11/14/22"
 editor: visual
 ---
 
-My name is Josh Yamamoto and I'm finishing up my final year as a Mathematics & Statistics major at Reed College. I have been lucky enough to interact with data science in a wide variety of settings and flavors. Out of that experience grew my primary interest: a deep passion for propagating thoughtfulness and intentionality in all of the ways that data science gets done. While I have a special love for solving very technical problems, I care just as much about how those problems get solved.
+My name is Josh Yamamoto. I'm a statistical software developer with an appreciation for interpersonal connection and principled data science workflows. After graduation from Reed College this spring with a degree in Mathematics & Statistics, I'll be on the job market for roles in statistical programming and data science.
+
+I have been lucky enough to interact with data science in a wide variety of settings and flavors. Out of that experience grew my primary interest: a deep passion for propagating thoughtfulness and intentionality in all of the ways that data science gets done. While I have a special love for solving very technical problems, I care just as much about how those problems get solved.
 
 I have a lot of research experience having done social justice computer science research at Reed College, biostatistics research at a joint program at Duke & NC State, and most recently forestry data science research at Harvard University. Each of these programs have been both deeply technical and deeply collaborative, giving me a strong appreciation for how important partnership is to solving difficult problems. 
 
