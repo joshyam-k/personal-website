@@ -9,7 +9,7 @@ My name is Josh Yamamoto and I'm finishing up my final year as a Mathematics & S
 
 My research experiences include social justice computer science research at Reed College, biostatistics research at a joint program at Duke & NC State, and most recently forestry data science research at Harvard University. Each of these programs have been both deeply technical and deeply collaborative, giving me a strong appreciation for how important partnership is to solving difficult problems. 
 
-I also have done work as a data science consultant at my college for the last three years, advising and implementing programs in R and other data technologies to catalyze research efforts by faculty and student researchers. I have also served as a course assistant and tutor for machine learning, and introductory statistics courses. While I always enjoy solving technical problems, I get just as much joy out of aiding and equiping other people to learn and solve problems themselves.
+I also have done work as a data science consultant at my college for the last three years, advising and implementing programs in R and other data technologies to catalyze research efforts by faculty and student researchers. I have also served as a course assistant and tutor for machine learning and introductory statistics courses. While I always enjoy solving technical problems, I get just as much joy out of equipping other people to learn and solve problems themselves.
 
 You can check out my complete resume [here](resume.qmd)!
 
