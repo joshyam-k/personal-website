@@ -1,0 +1,69 @@
+---
+title: "resume"
+editor: visual
+---
+
+## Joshua Yamamoto
+
+**Portland, OR • [github](https://github.com/joshyam-k)- joshyam-k • joshuayamamoto5\@gmail.com**
+
+### EDUCATION
+
+**BA Mathematics with a Concentration in Statistics** \| Reed College, Portland, OR \| May 2023
+
+Coursework in Statistics, Computer Science, Mathematics, Physics, and Philosophy
+
+Overall GPA: 3.95; Concentration GPA: 4.00
+
+### EXPERIENCE
+
+**Forestry Data Science Researcher** \| Harvard University, Cambridge MA \| June--August 2022
+
+-   Worked with Harvard students, faculty, and FIA workers to construct new forest inventory dashboards and investigate model-assisted and small area estimators
+-   Produced technical reports and presented in front of stakeholders on the assigned projects
+
+**Machine Learning Teaching Assistant** \| Reed College, Portland, Oregon \| August--December 2021
+
+-   Led interactive and collaborative help sessions twice a week on machine learning topics and assignments Data Science
+
+**Freelance Work & Transcription** \| rfortherestofus \| Portland, Oregon/Virtual \| July 2021--Present
+
+-   Reviewed virtual learning resources regarding the use and implementation of R for all types of users
+-   Reviewed and corrected transcriptions on videos used as the main resource for the company
+-   Completed technical project work: generated robust reports for a major client for the company. Worked collaboratively with other workers and the client to meet all of their needs
+-   Transferred all old learning resources to a new platform and ensured that no information was lost in the process.
+
+**Social Justice Computer Science Research** \| Eitan Frachtenberg, Reed College \| Portland, Oregon \| June--August 2021
+
+-   Worked with 1 other individual and a Reed Professor to collect and analyze extensive gender data on collaboration patterns in computer science research
+-   Wrote code in python to automate the process of curating and correcting the data set we generated
+-   Worked collaboratively with the professor to submit a paper that described our research, which was accepted and published in February 2022 and used as the cover for the issue of the MDPI journal
+
+**Biostatistics Researcher** \| Duke University /North Carolina State University SIBS \| Virtual \| May--July 2021
+
+-   Collaborated with other researchers on novel and unique biostatistics research projects. These primarily involved different analysis and modeling methods within the frame of biostatistics
+-   Attended learning sessions with renowned biostatistics researchers and professors
+-   Compiled a robust final project performing survival analysis on a complex and sophisticated data set
+
+**Introductory Statistics Tutor** \| Reed College Math Department \| Portland, Oregon \| August 2020--May 2021
+
+-   Helped several students to complete problem sets, labs, and projects with patience and attention to detail
+-   Fostered a positive learning environment in a subject that can be daunting for many students
+-   Reviewed and interpreted feedback for students
+
+**Data Science Consultant** \| Reed College CIS \| Portland,Oregon \| August 2020--Present
+
+-   Collaborated with others to produce the official R resource pages for Reed College
+-   Oversaw the creation of the official Data Equity resources for Reed College
+
+### PUBLICATIONS
+
+Gender Differences in Collaboration Patterns in Computer Science. https://doi.org/10.3390/publications10010010
+
+### SKILLS
+
+R/RStudio, Git/GitHub, Python, C/C++, SQL, LaTeX, QGIS, Google Suite
+
+### LANGUAGES
+
+Spanish (Advanced), French (Beginner)
