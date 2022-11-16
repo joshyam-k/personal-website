@@ -42,7 +42,7 @@ Overall GPA: 3.95; Concentration GPA: 4.00
 **Biostatistics Researcher** \| Duke University /North Carolina State University SIBS \| Virtual \| May--July 2021
 
 -   Collaborated with other researchers on novel and unique biostatistics research projects. These primarily involved different analysis and modeling methods within the frame of biostatistics
--   Attended learning sessions with high level biostatistics researchers and professors
+-   Attended learning sessions with renowned biostatistics researchers and professors
 -   Compiled a robust final project performing survival analysis on a complex and sophisticated data set
 
 **Introductory Statistics Tutor** \| Reed College Math Department \| Portland, Oregon \| August 2020--May 2021
