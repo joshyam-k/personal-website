@@ -2,7 +2,12 @@
 
 .sidebar-item-text {
   font-size: 27px;
-  padding-left: 20px;
+  padding-left: 18px;
+}
+
+.about-image {
+  width: 200px;
+  border-radius: 50px;
 }
 
 
