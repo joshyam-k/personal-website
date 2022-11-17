@@ -5,9 +5,13 @@
   padding-left: 18px;
 }
 
+.sidebar-menu-container {
+  padding-top: 90px;
+}
+
 .about-image {
   width: 200px;
-  border-radius: 50px;
+  border-radius: 30px;
 }
 
 
