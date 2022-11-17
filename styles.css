@@ -1,17 +1,17 @@
 /* css styles */
 
 .sidebar-item-text {
-  font-size: 27px;
+  font-size: 23px;
   padding-left: 18px;
 }
 
-.sidebar-menu-container {
+.list-unstyled {
   padding-top: 150px;
 }
 
 .about-image {
   width: 200px;
-  border-radius: 30px;
+  border-radius: 40px;
 }
 
 
