@@ -1,13 +1,11 @@
 /* css styles */
 
-.sidebar-item-text {
-  font-size: 23px;
-  padding-left: 18px;
+.nav-link {
+  font-weight: 300;
+  font-size: 21px;
 }
 
-.list-unstyled {
-  padding-top: 150px;
-}
+
 
 .about-image {
   width: 215px;
