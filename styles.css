@@ -1,1 +1,6 @@
 /* css styles */
+<style>
+  .sidebar-item-text sidebar-link active {
+    font.font-weight: bold;
+  }
+</style>
