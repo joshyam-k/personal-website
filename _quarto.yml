@@ -4,12 +4,12 @@ project:
 
 website:
   repo-url: https://github.com/joshyam-k/personal-website
-  sidebar: 
+  navbar: 
     style: "docked"
     pinned: true
     border: false
     search: false
-    contents: 
+    right: 
       - href: index.qmd
         text: "Home"
       - href: resume.qmd
