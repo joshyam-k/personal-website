@@ -9,6 +9,9 @@ website:
     pinned: true
     border: false
     search: false
+    tools:
+      - icon: github
+        href: https://github.com/joshyam-k/personal-website
     contents: 
       - href: index.qmd
         text: "Home"
