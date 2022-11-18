@@ -11,6 +11,8 @@ website:
     border: false
     search: false
     right: 
+      - href: shinytest.qmd
+        text: shiny
       - href: index.qmd
         text: "Home"
       - href: resume.qmd
