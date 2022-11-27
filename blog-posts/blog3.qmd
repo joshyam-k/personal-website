@@ -1,0 +1,18 @@
+---
+title: "I'm on the Job Market"
+description: "Looking for roles in statistical software"
+date: "11/16/22"
+editor: visual
+---
+
+My name is Josh Yamamoto. I'm a statistical software developer with an appreciation for interpersonal connection and principled data science workflows. After graduation from Reed College this spring with a degree in Mathematics & Statistics, I'll be on the job market for roles in statistical programming and data science.
+
+I have been lucky enough to interact with data science in a wide variety of settings and flavors. Out of that experience grew my primary interest: a deep passion for propagating thoughtfulness and intentionality in all of the ways that data science gets done. While I have a special love for solving very technical problems, I care just as much about how those problems get solved.
+
+I have a lot of research experience having done social justice computer science research at Reed College, biostatistics research at a joint program at Duke & NC State, and most recently forestry data science research at Harvard University. Each of these programs have been both deeply technical and deeply collaborative, giving me a strong appreciation for how important partnership is to solving difficult problems.
+
+I also have done work as a data science consultant at my college for the last three years, advising and implementing programs in R and other data technologies to catalyze research efforts by faculty and student researchers. I have also served as a course assistant and tutor for machine learning, and introductory statistics courses. While I always enjoy solving technical problems, I get just as much joy out of aiding and equiping other people to learn and solve problems themselves.
+
+You can check out my complete resume [here](https://joshyam-k.github.io/personal-website/resume.html)!
+
+I'm interested in working remotely or somewhere on the West Coast. As I'll be graduating in May of 2023 I'm looking for something that can start in June of 2023 or later. That being said, I'm looking to start chatting with folks now and would like to have something lined up for when I graduate! You can get in touch with me via email (joshuayamamoto5@gmail.com) or [Linkedin](https://www.linkedin.com/in/joshua-yamamoto-1b75611ab/) and you can check out the things I'm working on at my [github](https://github.com/joshyam-k).
