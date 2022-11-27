@@ -1,6 +1,6 @@
 ---
-title: "Writing a Simple Version of `safely"
-description: "R function operators and environments galore!`"
+title: "Writing a Simple Version of `safely`"
+description: "R function operators and environments galore!"
 date: "11/26/22"
 editor: visual
 ---
