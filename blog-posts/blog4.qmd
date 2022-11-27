@@ -13,7 +13,7 @@ library(tidyverse)
 library(rlang)
 
 tests <- list(
-  tibble(a = 1:10, b = 2:11),
+  tibble(a = 1:2, b = 2:3),
   tibble(a = 4:15, b = 1:12),
   tibble(a = 1:5, c = 6:10)
 )
@@ -40,12 +40,13 @@ out[[3]]
 
 We are now ready to write our own version of `safely()`
 
-Essentially all that our simple version will do is that it will return a function that uses `tryCatch` on our original function and returns a list with the output and the error (if one occurs).
+Essentially all that our simple version will do is that it will return a function that uses `tryCatch` on our original function and returns a list with the output and the error (if one occurs). We include an option to explicitly return the execution environment of the function for reasons that will become clear later on.
 
 ```{r}
-simple_safely <- function(.f) {
+simple_safely <- function(.f, show_exec_env = F) {
   .f <- as_mapper(.f)
   
+  if(show_exec_env) print(current_env())
   function(...) {
     out <- tryCatch(
       {
@@ -59,21 +60,51 @@ simple_safely <- function(.f) {
   }
 }
 
+
 out2 <- map(tests, simple_safely(~ .x["b"]))
 ```
 
 This seems simple enough, but at least for me it was unsatisfying that I didn't really understand what it was about R as a programming language that allowed function operations to work. Luckily we can dig a little bit into how this works by exploring the various environments associated with this procedure.
 
-We'll start by creating a function that is a safe version of the function `mean()`
+We'll start by creating a function that is a safe version of the function `sum()`
 
 ```{r}
-safe_mean <- simple_safely(mean)
+safe_sum <- simple_safely(sum)
 ```
 
-We can start by just looking at `safe_mean` itself
+We can start by just looking at `safe_sum` itself
 
 ```{r}
-safe_mean
+safe_sum
 ```
 
-Just looking at this output is fairly confusing because it just looks like the body of `simple_safely()` and it's unclear how the function knows how to find `.f`
+Just looking at this output is fairly confusing because it just looks like the body of `simple_safely()` and it's unclear how the function knows how to find `.f`.
+
+We can gain some insight by using `env_print()` which prints the label of the environment of its argument, the label of the parent environment of the argument's environment, as well as any bindings in the argument's environment.
+
+In this case since our input is a function, we see the label for that function environment and we also see that the parent environment is the global environment. We also see a binding for `.f` which seems promising...
+
+```{r}
+env_print(safe_mean)
+```
+
+
+We can see what that binding actuall is by extracting it:
+
+```{r}
+fn_env(safe_mean)$`.f`
+```
+
+And there it is, the function environment has a binding between `.f` and the function `sum()`. This is cool, but to really understand why this happens we can make use of the `show_exec_env` argument in our `simple_safely` function
+
+```{r}
+safe_sum2 <- simple_safely(sum, show_exec_env = T)
+```
+
+This time we get to see the label for the execution environment of this instance of `simple_safely`. And if we then once again inspect the environment of our newly created function...
+
+```{r}
+env_print(safe_sum2)
+```
+
+we see that the enclosing environment of our `safe_sum2` function is the execution environment from the instance of `simple_safely` that created it! And it's this little fact that makes these function operations work. When `safe_sum2` looks for `.f` it is really looking in an execution environment of `simple_safely` which contains a binding for what that function should be!
