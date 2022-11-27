@@ -92,7 +92,7 @@ env_print(safe_mean)
 We can see what that binding actuall is by extracting it:
 
 ```{r}
-fn_env(safe_mean)$`.f`
+fn_env(safe_sum)$`.f`
 ```
 
 And there it is, the function environment has a binding between `.f` and the function `sum()`. This is cool, but to really understand why this happens we can make use of the `show_exec_env` argument in our `simple_safely` function
@@ -101,10 +101,12 @@ And there it is, the function environment has a binding between `.f` and the fun
 safe_sum2 <- simple_safely(sum, show_exec_env = T)
 ```
 
-This time we get to see the label for the execution environment of this instance of `simple_safely`. And if we then once again inspect the environment of our newly created function...
+This time we get to see the label for the execution environment of this instance of `simple_safely` that created our function `safe_sum2`. Now remember that label, and look for it in the result of printing the environment for our newly manufactured function.
 
 ```{r}
 env_print(safe_sum2)
 ```
 
-we see that the enclosing environment of our `safe_sum2` function is the execution environment from the instance of `simple_safely` that created it! And it's this little fact that makes these function operations work. When `safe_sum2` looks for `.f` it is really looking in an execution environment of `simple_safely` which contains a binding for what that function should be!
+Ah! We see that the enclosing environment of our `safe_sum2` function is the execution environment from the instance of `simple_safely` that created it! And it's this little fact that makes these function operations work. When `safe_sum2` looks for `.f` it is really looking in an execution environment of `simple_safely` which contains a binding for what that function should be!
+
+
