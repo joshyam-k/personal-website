@@ -220,7 +220,7 @@ The following objects are masked from 'package:purrr':
     flatten_lgl, flatten_raw, invoke, splice</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">b =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">11</span>),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>),</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">b =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">c =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -242,19 +242,11 @@ The following objects are masked from 'package:purrr':
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>out[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$result
-# A tibble: 10 × 1
-       b
-   &lt;int&gt;
- 1     2
- 2     3
- 3     4
- 4     5
- 5     6
- 6     7
- 7     8
- 8     9
- 9    10
-10    11
+# A tibble: 2 × 1
+      b
+  &lt;int&gt;
+1     2
+2     3
 
 $error
 NULL</code></pre>
@@ -278,34 +270,36 @@ Backtrace:
 </div>
 </div>
 <p>We are now ready to write our own version of <code>safely()</code></p>
-<p>Essentially all that our simple version will do is that it will return a function that uses <code>tryCatch</code> on our original function and returns a list with the output and the error (if one occurs).</p>
+<p>Essentially all that our simple version will do is that it will return a function that uses <code>tryCatch</code> on our original function and returns a list with the output and the error (if one occurs). We include an option to explicitly return the execution environment of the function for reasons that will become clear later on.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>simple_safely <span class="ot">&lt;-</span> <span class="cf">function</span>(.f) {</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>simple_safely <span class="ot">&lt;-</span> <span class="cf">function</span>(.f, <span class="at">show_exec_env =</span> F) {</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  .f <span class="ot">&lt;-</span> <span class="fu">as_mapper</span>(.f)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(...) {</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      {</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">result =</span> <span class="fu">.f</span>(...), <span class="at">error =</span> <span class="cn">NULL</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      },</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">error =</span> <span class="cf">function</span>(cond){</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="at">result =</span> <span class="cn">NULL</span>, <span class="at">error =</span> cond)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>out2 <span class="ot">&lt;-</span> <span class="fu">map</span>(tests, <span class="fu">simple_safely</span>(<span class="sc">~</span> .x[<span class="st">"b"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(show_exec_env) <span class="fu">print</span>(<span class="fu">current_env</span>())</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(...) {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      {</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">list</span>(<span class="at">result =</span> <span class="fu">.f</span>(...), <span class="at">error =</span> <span class="cn">NULL</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      },</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">error =</span> <span class="cf">function</span>(cond){</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="at">result =</span> <span class="cn">NULL</span>, <span class="at">error =</span> cond)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>out2 <span class="ot">&lt;-</span> <span class="fu">map</span>(tests, <span class="fu">simple_safely</span>(<span class="sc">~</span> .x[<span class="st">"b"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This seems simple enough, but at least for me it was unsatisfying that I didn’t really understand what it was about R as a programming language that allowed function operations to work. Luckily we can dig a little bit into how this works by exploring the various environments associated with this procedure.</p>
-<p>We’ll start by creating a function that is a safe version of the function <code>mean()</code></p>
+<p>We’ll start by creating a function that is a safe version of the function <code>sum()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>safe_mean <span class="ot">&lt;-</span> <span class="fu">simple_safely</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>safe_sum <span class="ot">&lt;-</span> <span class="fu">simple_safely</span>(sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can start by just looking at <code>safe_mean</code> itself</p>
+<p>We can start by just looking at <code>safe_sum</code> itself</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>safe_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>safe_sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function(...) {
     out &lt;- tryCatch(
@@ -318,11 +312,50 @@ Backtrace:
     )
   return(out)
   }
-&lt;bytecode: 0x560a66cba658&gt;
-&lt;environment: 0x560a669e5250&gt;</code></pre>
+&lt;bytecode: 0x55e85d648f00&gt;
+&lt;environment: 0x55e85d2fa990&gt;</code></pre>
 </div>
 </div>
-<p>Just looking at this output is fairly confusing because it just looks like the body of <code>simple_safely()</code> and it’s unclear how the function knows how to find <code>.f</code></p>
+<p>Just looking at this output is fairly confusing because it just looks like the body of <code>simple_safely()</code> and it’s unclear how the function knows how to find <code>.f</code>.</p>
+<p>We can gain some insight by using <code>env_print()</code> which prints the label of the environment of its argument, the label of the parent environment of the argument’s environment, as well as any bindings in the argument’s environment.</p>
+<p>In this case since our input is a function, we see the label for that function environment and we also see that the parent environment is the global environment. We also see a binding for <code>.f</code> which seems promising…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(safe_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;environment: 0x55e85d2fa990&gt;
+Parent: &lt;environment: global&gt;
+Bindings:
+• .f: &lt;fn&gt;
+• show_exec_env: &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<p>We can see what that binding actuall is by extracting it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fn_env</span>(safe_sum)<span class="sc">$</span><span class="st">`</span><span class="at">.f</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (..., na.rm = FALSE) 
+.Primitive("sum")(..., na.rm = na.rm)</code></pre>
+</div>
+</div>
+<p>And there it is, the function environment has a binding between <code>.f</code> and the function <code>sum()</code>. This is cool, but to really understand why this happens we can make use of the <code>show_exec_env</code> argument in our <code>simple_safely</code> function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>safe_sum2 <span class="ot">&lt;-</span> <span class="fu">simple_safely</span>(sum, <span class="at">show_exec_env =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;environment: 0x55e85eb29128&gt;</code></pre>
+</div>
+</div>
+<p>This time we get to see the label for the execution environment of this instance of <code>simple_safely</code> that created our function <code>safe_sum2</code>. Now remember that label, and look for it in the result of printing the environment for our newly manufactured function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(safe_sum2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;environment: 0x55e85eb29128&gt;
+Parent: &lt;environment: global&gt;
+Bindings:
+• .f: &lt;fn&gt;
+• show_exec_env: &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<p>Ah! We see that the enclosing environment of our <code>safe_sum2</code> function is the execution environment from the instance of <code>simple_safely</code> that created it! And it’s this little fact that makes these function operations work. When <code>safe_sum2</code> looks for <code>.f</code> it is really looking in an execution environment of <code>simple_safely</code> which contains a binding for what that function should be!</p>
 
 
 
