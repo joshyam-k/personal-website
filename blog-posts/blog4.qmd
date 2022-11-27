@@ -85,7 +85,7 @@ We can gain some insight by using `env_print()` which prints the label of the en
 In this case since our input is a function, we see the label for that function environment and we also see that the parent environment is the global environment. We also see a binding for `.f` which seems promising...
 
 ```{r}
-env_print(safe_mean)
+env_print(safe_sum)
 ```
 
 
