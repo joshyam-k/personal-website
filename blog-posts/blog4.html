@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2022-11-26">
-<meta name="description" content="writing a simple version of safely">
+<meta name="description" content="R function operators and environments galore!`">
 
-<title>Function operators in R</title>
+<title>Writing a Simple Version of `safely</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#set-up" id="toc-set-up" class="nav-link active" data-scroll-target="#set-up">Set up</a></li>
   <li><a href="#our-own-version-of-safely" id="toc-our-own-version-of-safely" class="nav-link" data-scroll-target="#our-own-version-of-safely">Our own version of <code>safely</code></a></li>
   <li><a href="#inspecting-environments" id="toc-inspecting-environments" class="nav-link" data-scroll-target="#inspecting-environments">Inspecting Environments</a></li>
-  <li><a href="#a-few-a-ha-moments" id="toc-a-few-a-ha-moments" class="nav-link" data-scroll-target="#a-few-a-ha-moments">A few a-ha moments!</a></li>
+  <li><a href="#a-few-a-ha-moments" id="toc-a-few-a-ha-moments" class="nav-link" data-scroll-target="#a-few-a-ha-moments">A few a-ha! moments</a></li>
   </ul>
 </nav>
     </div>
@@ -178,12 +178,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Function operators in R</h1>
+<h1 class="title">Writing a Simple Version of `safely</h1>
 </div>
 
 <div>
   <div class="description">
-    writing a simple version of <code>safely</code>
+    R function operators and environments galore!`
   </div>
 </div>
 
@@ -315,8 +315,8 @@ Backtrace:
     )
   return(out)
   }
-&lt;bytecode: 0x560767dee978&gt;
-&lt;environment: 0x560767aaec70&gt;</code></pre>
+&lt;bytecode: 0x555795a48a58&gt;
+&lt;environment: 0x555795704f20&gt;</code></pre>
 </div>
 </div>
 <p>Just looking at this output is fairly confusing because it just looks like the body of <code>simple_safely()</code> and it’s unclear how the function knows how to find <code>.f</code>.</p>
@@ -325,7 +325,7 @@ Backtrace:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(safe_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x560767aaec70&gt;
+<pre><code>&lt;environment: 0x555795704f20&gt;
 Parent: &lt;environment: global&gt;
 Bindings:
 • .f: &lt;fn&gt;
@@ -334,7 +334,7 @@ Bindings:
 </div>
 </section>
 <section id="a-few-a-ha-moments" class="level3">
-<h3 class="anchored" data-anchor-id="a-few-a-ha-moments">A few a-ha moments!</h3>
+<h3 class="anchored" data-anchor-id="a-few-a-ha-moments">A few a-ha! moments</h3>
 <p>We can see what that binding actually is by extracting it:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fn_env</span>(safe_sum)<span class="sc">$</span><span class="st">`</span><span class="at">.f</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -347,21 +347,21 @@ Bindings:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>safe_sum2 <span class="ot">&lt;-</span> <span class="fu">simple_safely</span>(sum, <span class="at">show_exec_env =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x56076933e420&gt;</code></pre>
+<pre><code>&lt;environment: 0x555796f955b0&gt;</code></pre>
 </div>
 </div>
 <p>This time we get to see the label for the execution environment of this instance of <code>simple_safely</code> that created our function <code>safe_sum2</code>. Now remember that label, and look for it in the result of printing the environment for our newly manufactured function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(safe_sum2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x56076933e420&gt;
+<pre><code>&lt;environment: 0x555796f955b0&gt;
 Parent: &lt;environment: global&gt;
 Bindings:
 • .f: &lt;fn&gt;
 • show_exec_env: &lt;lgl&gt;</code></pre>
 </div>
 </div>
-<p>Ah! We see that the enclosing environment of our <code>safe_sum2</code> function is the execution environment from the instance of <code>simple_safely</code> that created it! And it’s this little fact that makes these function operations work. When <code>safe_sum2</code> looks for <code>.f</code> it is really looking in an execution environment of <code>simple_safely</code> which contains a binding for what that function should be!</p>
+<p>Ah! We see that the enclosing environment of our <code>safe_sum2</code> function is the execution environment from the instance of <code>simple_safely</code> that created it! And it’s this little fact that makes these function operators work. When <code>safe_sum2</code> looks for <code>.f</code> it is really looking in an execution environment of <code>simple_safely</code> which contains a binding for what that function should be!</p>
 
 
 </section>
