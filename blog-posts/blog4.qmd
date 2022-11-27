@@ -1,6 +1,6 @@
 ---
-title: "Function operators in R"
-description: "writing a simple version of `safely`"
+title: "Writing a Simple Version of `safely"
+description: "R function operators and environments galore!`"
 date: "11/26/22"
 editor: visual
 ---
@@ -106,7 +106,7 @@ env_print(safe_sum)
 ```
 
 
-### A few a-ha moments!
+### A few a-ha! moments
 
 We can see what that binding actually is by extracting it:
 
@@ -126,6 +126,6 @@ This time we get to see the label for the execution environment of this instance
 env_print(safe_sum2)
 ```
 
-Ah! We see that the enclosing environment of our `safe_sum2` function is the execution environment from the instance of `simple_safely` that created it! And it's this little fact that makes these function operations work. When `safe_sum2` looks for `.f` it is really looking in an execution environment of `simple_safely` which contains a binding for what that function should be!
+Ah! We see that the enclosing environment of our `safe_sum2` function is the execution environment from the instance of `simple_safely` that created it! And it's this little fact that makes these function operators work. When `safe_sum2` looks for `.f` it is really looking in an execution environment of `simple_safely` which contains a binding for what that function should be!
 
 
