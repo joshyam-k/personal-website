@@ -5,13 +5,18 @@ date: "11/26/22"
 editor: visual
 ---
 
-A function operator is defined as a function that takes any number of functions as input and returns a function as output. As a way to better understand how they work and why they work, I'll write a simple version of `purrr::safely()`. `safely()` is a really nice way to guard your functional programming against errors as it will allow your functionals to keep running even when they throw errors. I'll show it in action with a simple example
+### Set up
 
-```{r}
+```{r, warning = F, message = F}
 library(purrr)
 library(tidyverse)
 library(rlang)
+```
 
+A function operator is defined as a function that takes any number of functions as input and returns a function as output. As a way to better understand how they work and why they work, I'll write a simple version of `purrr::safely()`. `safely()` is a really nice way to guard your functional programming against errors as it will allow your functionals to keep running even when they throw errors. I'll show it in action with a simple example
+
+
+``` {r}
 tests <- list(
   tibble(a = 1:2, b = 2:3),
   tibble(a = 4:15, b = 1:12),
@@ -31,14 +36,24 @@ map(tests, ~ .x["b"])
 #  4. tibble:::`[.tbl_df`(.x, "b")
 ```
 
+Run on its own, this immediately throws an error and returns no output. But fear not, we can use the function `safely`:
+
 ```{r}
 out <- map(tests, safely( ~ .x["b"]))
+```
 
+This runs without errors and if we inspect the first item in the output and the third item in the output we can see that each output item contains the output and any error that occurs.
+
+```{r}
 out[[1]]
 out[[3]]
 ```
 
-We are now ready to write our own version of `safely()`
+
+Now that we understand the functionality of `safely` we are ready to write our own version.
+
+
+### Our own version of `safely`
 
 Essentially all that our simple version will do is that it will return a function that uses `tryCatch` on our original function and returns a list with the output and the error (if one occurs). We include an option to explicitly return the execution environment of the function for reasons that will become clear later on.
 
@@ -66,6 +81,8 @@ out2 <- map(tests, simple_safely(~ .x["b"]))
 
 This seems simple enough, but at least for me it was unsatisfying that I didn't really understand what it was about R as a programming language that allowed function operations to work. Luckily we can dig a little bit into how this works by exploring the various environments associated with this procedure.
 
+### Inspecting Environments
+
 We'll start by creating a function that is a safe version of the function `sum()`
 
 ```{r}
@@ -89,13 +106,15 @@ env_print(safe_sum)
 ```
 
 
-We can see what that binding actuall is by extracting it:
+### A few a-ha moments!
+
+We can see what that binding actually is by extracting it:
 
 ```{r}
 fn_env(safe_sum)$`.f`
 ```
 
-And there it is, the function environment has a binding between `.f` and the function `sum()`. This is cool, but to really understand why this happens we can make use of the `show_exec_env` argument in our `simple_safely` function
+And there it is, the function environment has a binding between `.f` and the function `sum()`. This is cool, but to really understand why this binding happens we can make use of the `show_exec_env` argument in our `simple_safely` function:
 
 ```{r}
 safe_sum2 <- simple_safely(sum, show_exec_env = T)
