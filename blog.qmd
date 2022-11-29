@@ -1,9 +1,9 @@
 ---
-title: "stats + coding thoughts"
 listing: 
   contents: blog-posts
   sort: "date desc"
 ---
 
-
+:::{.blog-box}
 [stats + coding thoughts]{.blog-title}
+:::

@@ -22,5 +22,8 @@
   },
   "shinytest.qmd": {
     "shinytest.html": "0099c004"
+  },
+  "blog-posts/blog3.qmd": {
+    "blog3.html": "03b77326"
   }
 }
