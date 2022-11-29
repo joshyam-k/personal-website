@@ -6,6 +6,4 @@ listing:
 ---
 
 
-::: {.blog-title}
-stats + coding thoughts
-:::
+[stats + coding thoughts]{.blog-title}
