@@ -1,0 +1,109 @@
+---
+title: "How to batch download data files from a google drive directory"
+description: "using googledrive + purrr!"
+date: "2/6/23"
+editor: visual
+---
+
+I recently came across a situation where I was helping someone wrangle, clean, and combine their data for a project of theirs, but what made this trickier than usual was the fact that they had 400+ data files and they were all stored in a google drive folder.
+
+Immediately, two different options came to mind
+
+1.  Individually download each file locally to my computer and then write a script to read all 400 of them into an R environment.
+
+2.  Learn the `googledrive` package and download/read-in the files directly from the drive.
+
+As you might expect, I chose option 2 and it ended up being a really cool learning experience so I decided to share the process here!
+
+### Loading in packages
+
+You first need to install and then download the `googledrive` and `tidyverse` package. Although the `here` package isn't strictly necessary here, it makes dealing with directories and paths a lot simpler. 
+
+```{r, message=F, warning=F}
+library(googledrive)
+library(tidyverse)
+library(here)
+```
+
+
+### Authentication
+
+Of course, we'll need to allow the `googledrive` package and Google Drive API to talk to each other, and the `googledrive` package makes this very straightforward. It seems like most any function from the package that requires access to your drive will trigger the authentication process, and so you can just run something like
+
+```{r, eval = F}
+drive_find(n_max = 5)
+```
+
+to initialize the process. It should open a window in your browser and prompt you to select a Google account that contains the folder you are interested in downloading files from. You'll need to check the box that gives "Tidyverse API Packages" access to "See, edit, create, and delete all of your Google Drive files". The language here sounds scary, but the package documentation and naming is quite robust and so it's quite easy to use the package without worrying about messing something up. For example the only way to delete files from your drive is to use the `drive_rm()` function, whose name makes it very clear what it does.
+
+
+### main work
+
+First, we'll make use of the `drive_get()` function to collect some metadata about the folder that we wish to download files from. The `as_id()` function just tells `drive_get()` that this is a file id and not a file name.
+
+```{r, eval = F}
+folder <- drive_get(as_id("url_for_google_drive_folder_containing_the_data_files"))
+```
+
+From here we can make use of the `drive_ls()` function save the contents of that folder.
+
+```{r, eval = F}
+dta_files <- drive_ls(folder)
+```
+
+The return value is a tibble where each row corresponds to a different file. The `drive_resource` column contains a lot of information that we won't need for this example, but we can see the name of each file, as well as the shared drive id, both of which will be very useful to us.
+
+```{r, echo=F}
+tibble(
+  name = c("file1.csv", "file2.csv", "file3.csv"),
+  id = c("2123oihfep1pijfoje2", "09p12nfe-fdashflk2", "jdfl0-12eb2-1fdfgG"),
+  drive_resource = c(list(kind = "fdfads"), list(kind = "sdfasdfs"), list(kind = "fadfas"))
+)
+```
+
+
+Now, we'd really like to download each file into a local folder in our R project so that we can then read them all in, and ideally we would like to preserve the file names as well. To download a single file we use the `drive_download()` function as follows
+
+```{r, eval = F}
+drive_download(file = "drive_id", path = "path_for_output_file")
+```
+
+If we don't specify the path argument, the files will all just be saved to the current working directory, so one option would be to set your working directory as the folder that you want to download these files into, but a more robust option is to iteratively set the file and path arguments using `purrr` functions.
+
+We have two arguments that we'll be iterating over and since we're just downloading the files we are mostly just interested in the side effects (e.g the file downloading) of running `drive_download()` so we can use the function `walk2()`.
+
+Our first argument is the drive `id` for each file, and the second is the `name` of the file which we will use to create the file path for where each file will get saved.
+
+```{r, eval = F}
+walk2(
+  .x = dta_files$id, .y = dta_files$name,
+  .f = ~ drive_download(.x, path = here("path-for-folder-to-download-files-into", .y))
+)
+```
+
+In order to loead each file into our R environment we need to iterate over the paths to each file, which we can generate as follows,
+
+```{r, eval = F}
+local_filepaths <- paste0(here("path-for-folder-to-download-files-into", dta_files$name))
+```
+
+Finally, we can use `map()` along with the appropriate `read_*` function to store each individual data file in a list object
+
+```{r, eval = F}
+dta_list <- local_filepaths %>% 
+  map(.f = ~read_csv(.x))
+```
+
+If each data file happens to have the same exact columns and they need to be row-binded together you can avoid writing another iterative step and instead use:
+
+```{r, eval = F}
+dta_list <- local_filepaths %>% 
+  map_df(.f = ~read_csv(.x))
+```
+
+And that's it! We can access the ith file by indexing as follows
+
+```{r, eval = F}
+dta_list[[i]]
+```
+

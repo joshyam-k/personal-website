@@ -15,8 +15,7 @@ library(rlang)
 
 A function operator is defined as a function that takes any number of functions as input and returns a function as output. As a way to better understand how they work and why they work, I'll write a simple version of `purrr::safely()`. `safely()` is a really nice way to guard your functional programming against errors as it will allow your functionals to keep running even when they throw errors. I'll show it in action with a simple example
 
-
-``` {r}
+```{r}
 tests <- list(
   tibble(a = 1:2, b = 2:3),
   tibble(a = 4:15, b = 1:12),
@@ -49,9 +48,7 @@ out[[1]]
 out[[3]]
 ```
 
-
 Now that we understand the functionality of `safely` we are ready to write our own version.
-
 
 ### Our own version of `safely`
 
@@ -105,7 +102,6 @@ In this case since our input is a function, we see the label for that function e
 env_print(safe_sum)
 ```
 
-
 ### A few a-ha! moments
 
 We can see what that binding actually is by extracting it:
@@ -127,5 +123,3 @@ env_print(safe_sum2)
 ```
 
 Ah! We see that the enclosing environment of our `safe_sum2` function is the execution environment from the instance of `simple_safely` that created it! And it's this little fact that makes these function operators work. When `safe_sum2` looks for `.f` it is really looking in an execution environment of `simple_safely` which contains a binding for what that function should be!
-
-
