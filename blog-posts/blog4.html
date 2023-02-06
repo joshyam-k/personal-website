@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -315,8 +315,8 @@ Backtrace:
     )
   return(out)
   }
-&lt;bytecode: 0x55f645bbae98&gt;
-&lt;environment: 0x55f645875450&gt;</code></pre>
+&lt;bytecode: 0x55e350692690&gt;
+&lt;environment: 0x55e350350ef8&gt;</code></pre>
 </div>
 </div>
 <p>Just looking at this output is fairly confusing because it just looks like the body of <code>simple_safely()</code> and it’s unclear how the function knows how to find <code>.f</code>.</p>
@@ -325,7 +325,7 @@ Backtrace:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(safe_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55f645875450&gt;
+<pre><code>&lt;environment: 0x55e350350ef8&gt;
 Parent: &lt;environment: global&gt;
 Bindings:
 • .f: &lt;fn&gt;
@@ -347,14 +347,14 @@ Bindings:
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>safe_sum2 <span class="ot">&lt;-</span> <span class="fu">simple_safely</span>(sum, <span class="at">show_exec_env =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55f64710d730&gt;</code></pre>
+<pre><code>&lt;environment: 0x55e351becbb8&gt;</code></pre>
 </div>
 </div>
 <p>This time we get to see the label for the execution environment of this instance of <code>simple_safely</code> that created our function <code>safe_sum2</code>. Now remember that label, and look for it in the result of printing the environment for our newly manufactured function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">env_print</span>(safe_sum2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;environment: 0x55f64710d730&gt;
+<pre><code>&lt;environment: 0x55e351becbb8&gt;
 Parent: &lt;environment: global&gt;
 Bindings:
 • .f: &lt;fn&gt;
