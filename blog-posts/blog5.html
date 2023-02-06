@@ -168,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#loading-in-packages" id="toc-loading-in-packages" class="nav-link active" data-scroll-target="#loading-in-packages">Loading in packages</a></li>
   <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
-  <li><a href="#main-work" id="toc-main-work" class="nav-link" data-scroll-target="#main-work">main work</a></li>
+  <li><a href="#main-work" id="toc-main-work" class="nav-link" data-scroll-target="#main-work">Main Work</a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>to initialize the process. It should open a window in your browser and prompt you to select a Google account that contains the folder you are interested in downloading files from. You’ll need to check the box that gives “Tidyverse API Packages” access to “See, edit, create, and delete all of your Google Drive files”. The language here sounds scary, but the package documentation and naming is quite robust and so it’s quite easy to use the package without worrying about messing something up. For example the only way to delete files from your drive is to use the <code>drive_rm()</code> function, whose name makes it very clear what it does.</p>
 </section>
 <section id="main-work" class="level3">
-<h3 class="anchored" data-anchor-id="main-work">main work</h3>
+<h3 class="anchored" data-anchor-id="main-work">Main Work</h3>
 <p>First, we’ll make use of the <code>drive_get()</code> function to collect some metadata about the folder that we wish to download files from. The <code>as_id()</code> function just tells <code>drive_get()</code> that this is a file id and not a file name.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>folder <span class="ot">&lt;-</span> <span class="fu">drive_get</span>(<span class="fu">as_id</span>(<span class="st">"url_for_google_drive_folder_containing_the_data_files"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -258,8 +258,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">walk2</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">.x =</span> dta_files<span class="sc">$</span>id, <span class="at">.y =</span> dta_files<span class="sc">$</span>name,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">.f =</span> <span class="sc">~</span> <span class="fu">drive_download</span>(.x, <span class="at">path =</span> <span class="fu">here</span>(<span class="st">"path-for-folder-to-download-files-into"</span>, .y))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">.f =</span> <span class="sc">~</span> <span class="fu">drive_download</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .x, <span class="at">path =</span> <span class="fu">here</span>(<span class="st">"path-for-folder-to-download-files-into"</span>, .y)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In order to loead each file into our R environment we need to iterate over the paths to each file, which we can generate as follows,</p>
 <div class="cell">
