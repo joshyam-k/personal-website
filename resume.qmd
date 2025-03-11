@@ -5,7 +5,7 @@ editor: visual
 
 #### Joshua Yamamoto
 
-**Portland, OR • [github](https://github.com/joshyam-k)- joshyam-k • joshuayamamoto5\@gmail.com**
+**San Francisco, CA • [github](https://github.com/joshyam-k)- joshyam-k • joshuayamamoto5\@gmail.com**
 
 ##### EDUCATION
 
@@ -16,6 +16,13 @@ Coursework in Statistics, Computer Science, Mathematics, Physics, and Philosophy
 Overall GPA: 3.95; Concentration GPA: 4.00
 
 ##### EXPERIENCE
+
+**Statistical Software Developer** \| RedCastle Resources, Salt Lake City \| June 2023 - Present
+
+-  Developed the forestry estimation software, FIESTA.
+-  Built out unit testing, created new CI/CD workflows, and implemented new model assisted estimators.
+-  Aided with the transition to a web based application with database population and management.
+-  Presented the work of forestry attribute estimation software at the Partnership for Small Area Estimation Meeting and at the Joint Statistical Meetings Conference.
 
 **Forestry Data Science Researcher** \| Harvard University, Cambridge MA \| June--August 2022
 
@@ -60,9 +67,12 @@ Overall GPA: 3.95; Concentration GPA: 4.00
 
 Gender Differences in Collaboration Patterns in Computer Science. https://doi.org/10.3390/publications10010010
 
+Small area estimation of forest biomass via a two-stage model for continuous zero-inflated data. https://doi.org/10.1139/cjfr-2024-0149
+
+
 ##### SKILLS
 
-R/RStudio, Git/GitHub, Python, C/C++, SQL, LaTeX, QGIS, Google Suite
+ R/RStudio, Git/GitHub, C/C++, SQL, PostgreSQL,  QGIS, Python
 
 ##### LANGUAGES
 
