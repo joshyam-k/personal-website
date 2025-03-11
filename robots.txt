@@ -1,1 +1,1 @@
-Sitemap: https://github.com/joshyam-k/personal-website/sitemap.xml
+Sitemap: https://joshyam-k.github.io/personal-website/sitemap.xml
